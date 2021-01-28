@@ -11,11 +11,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from './src/aws-exports';
+Amplify.configure(awsconfig);
 
 export default function App() {
   return (
     <NavigationContainer theme={navigationTheme}>
-      <AppNavigator />
+      <AuthNavigator />
     </NavigationContainer>
   );
 }

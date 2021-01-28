@@ -1,0 +1,43 @@
+enum ClothingType {
+  JACKET
+  SUIT
+  HOODIE
+  PANTS
+}
+
+type Metrics @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  AveragePrice: Float
+  IdentityScore: Float
+}
+
+type Item @model @auth(rules: [{allow: public}]) @key(name: "byThriftStore", fields: ["thriftstoreID"]) {
+  id: ID!
+  Name: String!
+  Brand: String!
+  ItemCategory: ClothingType!
+  Size: String!
+  thriftstoreID: ID!
+  Price: Float
+  Images: [AWSURL!]
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  FirstName: String!
+  UserMetrics: Metrics @connection
+  LastName: String
+  PhoneNumber: AWSPhone
+  Email: AWSEmail
+  Address: String
+  PurchasedItems: [ID]
+  CartItems: [ID]
+}
+
+type ThriftStore @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Name: String!
+  Inventory: [Item] @connection(keyName: "byThriftStore", fields: ["id"])
+  Address: String!
+}
+ 
