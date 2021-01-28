@@ -1,0 +1,21 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-dresser-staging-220455-authRole",
+      "UnauthRoleArn": "arn:aws:iam::192418481205:role/amplify-dresser-staging-220455-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::192418481205:role/amplify-dresser-staging-220455-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-dresser-staging-220455-deployment",
+      "UnauthRoleName": "amplify-dresser-staging-220455-unauthRole",
+      "StackName": "amplify-dresser-staging-220455",
+      "StackId": "arn:aws:cloudformation:us-east-1:192418481205:stack/amplify-dresser-staging-220455/87a0c220-5b6b-11eb-849b-126979f2f819",
+      "AmplifyAppId": "d2tk31qvzwdgyw"
+    },
+    "categories": {
+      "auth": {
+        "dresser71900b33": {},
+        "dresser278ea648": {}
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Button,
   StyleSheet,
   Image,
   ImageBackground,
@@ -16,11 +17,7 @@ import SubmitButton from "../components/Forms/SubmitButton";
 import SectionTitle from "../components/SectionTitle";
 
 import colors from "../config/colors";
-
-const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().min(4).label("Password"),
-});
+import { Auth } from 'aws-amplify'
 
 function LoginScreen(props) {
   return (
@@ -29,33 +26,9 @@ function LoginScreen(props) {
       <View style={styles.textBox}>
         <Text style={styles.text}>dresser</Text>
       </View>
-
-      <AppForm
-        initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
-        validationSchema={validationSchema}
-      >
-        <AppFormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="email"
-          keyboardType="email-address"
-          name="email"
-          placeholder="Email"
-          textContentType="emailAddress"
-        />
-        <AppFormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="lock"
-          name="password"
-          placeholder="Password"
-          secureTextEntry
-          textContentType="password"
-        />
-        <SubmitButton title="Login" />
-      </AppForm>
+      <Button title="Login with Google" onPress = {() => Auth.federatedSignIn({ provider: "Google"})}/>
     </Screen>
+    
   );
 }
 
