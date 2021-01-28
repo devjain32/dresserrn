@@ -29,7 +29,10 @@ function HomeScreen({ navigation }) {
       <View style={styles.topPart}>
         <MenuOpener onPress={() => navigation.toggleDrawer()} />
         <SectionTitle text="dresser" size={50} />
-        <Profile link="https://images.unsplash.com/photo-1611410987022-a30a8ff82da3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" />
+        <Profile
+          onPress={() => navigation.navigate("Account")}
+          link="https://images.unsplash.com/photo-1611410987022-a30a8ff82da3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+        />
       </View>
       <SearchContainer />
       <View style={styles.sortby}>

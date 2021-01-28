@@ -1,18 +1,26 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 
-function Profile({ link }) {
+function Profile({ link, onPress }) {
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={{
-          height: 60,
-          width: 60,
-          uri: link,
-        }}
-      />
-    </View>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.container}>
+        <Image
+          style={styles.image}
+          source={{
+            height: 60,
+            width: 60,
+            uri: link,
+          }}
+        />
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
