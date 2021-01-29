@@ -67,7 +67,11 @@ export default {
       category: "Jackets",
       brand: "Banana Republic",
       thriftStore: "Buffalo Exchange",
-      tags: ["Cool", "Blue", "Fun"],
+      tags: [
+        { id: 1, tag: "Cool" },
+        { id: 2, tag: "Blue" },
+        { id: 3, tag: "Fun" },
+      ],
       status: { progress: "delivered", destination: "bob" },
     },
     {
@@ -79,7 +83,11 @@ export default {
       category: "Suits",
       brand: "Banana Republic",
       thriftStore: "Buffalo Exchange",
-      tags: ["Cool", "Blue", "Fun"],
+      tags: [
+        { id: 1, tag: "Cool" },
+        { id: 2, tag: "Blue" },
+        { id: 3, tag: "Fun" },
+      ],
       status: { progress: "delivered", destination: "dev" },
     },
     {
@@ -91,7 +99,11 @@ export default {
       category: "Hoodies",
       brand: "H&M",
       thriftStore: "Buffalo Exchange",
-      tags: ["Cool", "Blue", "Fun"],
+      tags: [
+        { id: 1, tag: "Cool" },
+        { id: 2, tag: "Blue" },
+        { id: 3, tag: "Fun" },
+      ],
       status: { progress: "delivered", destination: "dev" },
     },
     {
@@ -103,7 +115,11 @@ export default {
       category: "Jackets",
       brand: "Banana Republic",
       thriftStore: "Buffalo Exchange",
-      tags: ["Cool", "Blue", "Fun"],
+      tags: [
+        { id: 1, tag: "Cool" },
+        { id: 2, tag: "Blue" },
+        { id: 3, tag: "Fun" },
+      ],
       status: { progress: "delivering", destination: "dev" },
     },
     {
@@ -115,7 +131,11 @@ export default {
       category: "Jackets",
       brand: "Banana Republic",
       thriftStore: "Buffalo Exchange",
-      tags: ["Cool", "Blue", "Fun"],
+      tags: [
+        { id: 1, tag: "Cool" },
+        { id: 2, tag: "Blue" },
+        { id: 3, tag: "Fun" },
+      ],
       status: { progress: "processing", destination: "dev" },
     },
     {
@@ -127,7 +147,11 @@ export default {
       category: "Jackets",
       brand: "Banana Republic",
       thriftStore: "Buffalo Exchange",
-      tags: ["Cool", "Blue", "Fun"],
+      tags: [
+        { id: 1, tag: "Cool" },
+        { id: 2, tag: "Blue" },
+        { id: 3, tag: "Fun" },
+      ],
       status: { progress: "delivering", destination: "dev" },
     },
     {
@@ -139,7 +163,11 @@ export default {
       category: "Jackets",
       brand: "Banana Republic",
       thriftStore: "Buffalo Exchange",
-      tags: ["Cool", "Blue", "Fun"],
+      tags: [
+        { id: 1, tag: "Cool" },
+        { id: 2, tag: "Blue" },
+        { id: 3, tag: "Fun" },
+      ],
       status: { progress: "delivering", destination: "dev" },
     },
     {
@@ -151,7 +179,11 @@ export default {
       category: "Jackets",
       brand: "Banana Republic",
       thriftStore: "Buffalo Exchange",
-      tags: ["Cool", "Blue", "Fun"],
+      tags: [
+        { id: 1, tag: "Cool" },
+        { id: 2, tag: "Blue" },
+        { id: 3, tag: "Fun" },
+      ],
       status: { progress: "delivering", destination: "dev" },
     },
     {
@@ -163,7 +195,11 @@ export default {
       category: "Jackets",
       brand: "Banana Republic",
       thriftStore: "Buffalo Exchange",
-      tags: ["Cool", "Blue", "Fun"],
+      tags: [
+        { id: 1, tag: "Cool" },
+        { id: 2, tag: "Blue" },
+        { id: 3, tag: "Fun" },
+      ],
       status: { progress: "delivering", destination: "dev" },
     },
     {
@@ -175,7 +211,11 @@ export default {
       category: "Jackets",
       brand: "Banana Republic",
       thriftStore: "Buffalo Exchange",
-      tags: ["Cool", "Blue", "Fun"],
+      tags: [
+        { id: 1, tag: "Cool" },
+        { id: 2, tag: "Blue" },
+        { id: 3, tag: "Fun" },
+      ],
       status: { progress: "delivering", destination: "dev" },
     },
     {
@@ -187,7 +227,11 @@ export default {
       category: "Jackets",
       brand: "Banana Republic",
       thriftStore: "Buffalo Exchange",
-      tags: ["Cool", "Blue", "Fun"],
+      tags: [
+        { id: 1, tag: "Cool" },
+        { id: 2, tag: "Blue" },
+        { id: 3, tag: "Fun" },
+      ],
       status: { progress: "delivering", destination: "bob" },
     },
     {
@@ -199,7 +243,11 @@ export default {
       category: "Jackets",
       brand: "Banana Republic",
       thriftStore: "Buffalo Exchange",
-      tags: ["Cool", "Blue", "Fun"],
+      tags: [
+        { id: 1, tag: "Cool" },
+        { id: 2, tag: "Blue" },
+        { id: 3, tag: "Fun" },
+      ],
       status: { progress: "delivering", destination: "bob" },
     },
   ],

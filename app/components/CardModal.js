@@ -30,7 +30,6 @@ function CardModal({ title, image, subtitle, information }) {
         <Screen style={styles.modalContainer}>
           <View style={styles.modalBox}>
             <Button title="Close" onPress={() => setModalVisible(false)} />
-            {/* <Text></Text> */}
           </View>
         </Screen>
       </Modal>
