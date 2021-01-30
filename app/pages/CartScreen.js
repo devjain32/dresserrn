@@ -8,6 +8,7 @@ import {
   Image,
   ImageBackground,
   ScrollView,
+  FlatList,
 } from "react-native";
 import Constants from "expo-constants";
 import Screen from "../components/Screen";
@@ -23,18 +24,48 @@ import colors from "../config/colors";
 import lists from "../config/lists";
 import SortBy from "../components/SortBy";
 import ListModal from "../components/ListModal";
-import { filterLists } from "../config/filter";
+import { calcTotal, filterLists } from "../config/filter";
+import Card from "../components/Card";
 
 function CartScreen({ navigation }) {
-  const newList = filterLists(lists, "Hoodies");
+  const newList = filterLists(lists, "Jackets");
+  const total = calcTotal(newList);
   return (
     <View style={styles.view}>
       <View style={styles.topPart}>
         <MenuOpener onPress={() => navigation.toggleDrawer()} />
         <SectionTitle text="cart" size={50} />
-        <Profile link="https://images.unsplash.com/photo-1611410987022-a30a8ff82da3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" />
+        <Profile
+          onPress={() => navigation.navigate("Account")}
+          link="https://images.unsplash.com/photo-1611410987022-a30a8ff82da3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+        />
       </View>
-      <ListModal size={30} data={newList} />
+      <View style={styles.box}>
+        <View style={styles.priceBox}>
+          <Text style={styles.totalPriceMessage}>Total Price: </Text>
+          <Text style={styles.totalPrice}>{"$" + total}</Text>
+        </View>
+        <View styles={styles.checkout}>
+          <Text>Hello</Text>
+        </View>
+      </View>
+      <FlatList
+        data={newList}
+        keyExtractor={(listings) => listings.id.toString()}
+        numColumns={2}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 200 }}
+        columnWrapperStyle={styles.column}
+        renderItem={({ item }) => (
+          <Card
+            title={item.title}
+            subtitle={"$" + item.price}
+            image={item.image}
+            onPress={() => navigation.navigate("ItemDetails", item)}
+            onPressDelete={() => console.log("Delete item")}
+          />
+        )}
+      />
     </View>
   );
 }
@@ -61,6 +92,43 @@ const styles = StyleSheet.create({
   view: {
     paddingTop: Constants.statusBarHeight,
     backgroundColor: colors.backgroundColor,
+  },
+  column: {
+    justifyContent: "space-between",
+    marginLeft: 20,
+    marginRight: 20,
+  },
+  box: {
+    backgroundColor: colors.primary,
+    marginRight: 30,
+    marginLeft: 30,
+    marginBottom: 20,
+    marginTop: 30,
+    height: 80,
+    borderRadius: 20,
+  },
+  priceBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingTop: 10,
+  },
+  totalPriceMessage: {
+    marginLeft: 20,
+    fontSize: 20,
+    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+  },
+  totalPrice: {
+    marginRight: 10,
+    fontSize: 20,
+    marginRight: 20,
+  },
+  checkout: {
+    width: "100%",
+    height: 10,
+    backgroundColor: "red",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

@@ -11,3 +11,11 @@ export const filterLists = function (lists, category) {
   }
   return newList;
 };
+
+export const calcTotal = function (newList) {
+  var total = 0;
+  for (i = 0; i < newList.length; i++) {
+    total = total + newList[i].price;
+  }
+  return total;
+};

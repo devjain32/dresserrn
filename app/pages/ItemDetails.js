@@ -54,10 +54,10 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 18,
-    color: colors.primary,
+    color: colors.arrowColor,
   },
   pricebox: {
-    backgroundColor: "red",
+    backgroundColor: colors.primary,
     padding: 10,
     marginRight: 10,
     borderRadius: 6,

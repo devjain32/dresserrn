@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
+import colors from "../config/colors";
 
 function ListCategories({ title, subtitle, tags }) {
   return (
@@ -12,12 +13,18 @@ function ListCategories({ title, subtitle, tags }) {
             horizontal={true}
             keyExtractor={(tags) => tags.id.toString()}
             renderItem={({ item }) => (
-              <Text style={[styles.tagBox, styles.textBox]}>{item.tag}</Text>
+              <View style={styles.box}>
+                <Text style={[styles.tagBox, styles.textBox]}>{item.tag}</Text>
+              </View>
             )}
           />
         </View>
       )}
-      {subtitle && <Text style={styles.textBox}>{subtitle}</Text>}
+      {subtitle && (
+        <View style={styles.box}>
+          <Text style={styles.textBox}>{subtitle}</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -31,11 +38,13 @@ const styles = StyleSheet.create({
   },
   listTags: {},
   textBox: {
-    backgroundColor: "red",
     padding: 10,
   },
-  tagBox: {
+  tagBox: {},
+  box: {
+    backgroundColor: colors.primary,
     marginRight: 10,
+    borderRadius: 8,
   },
 });
 

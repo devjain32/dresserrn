@@ -2,18 +2,30 @@ import React from "react";
 import {
   View,
   Text,
-  Image,
+  ImageBackground,
   StyleSheet,
   TouchableWithoutFeedback,
 } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { BlurView } from "expo-blur";
 
 import colors from "../config/colors";
 
-function Card({ title, image, subtitle, onPress }) {
+function Card({ title, image, subtitle, onPress, onPressDelete }) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.box}>
-        <Image style={styles.image} source={{ uri: image }} />
+        <ImageBackground style={styles.image} source={{ uri: image }}>
+          {onPressDelete && (
+            <View style={styles.xcontainer}>
+              <TouchableWithoutFeedback onPress={onPressDelete}>
+                <BlurView intensity={100} tint="default">
+                  <Feather name="x" size={20} color="black" />
+                </BlurView>
+              </TouchableWithoutFeedback>
+            </View>
+          )}
+        </ImageBackground>
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.subtitle}>{subtitle}</Text>
@@ -47,6 +59,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+  },
+  xcontainer: {
+    width: 20,
+    height: 20,
+    marginLeft: 10,
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
