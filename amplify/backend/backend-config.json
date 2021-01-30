@@ -22,7 +22,7 @@
     }
   },
   "auth": {
-    "dresser278ea648": {
+    "dresser72ee93ac": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
