@@ -5,7 +5,7 @@ import OrdersScreen from "../pages/OrdersScreen";
 const Stack = createStackNavigator();
 
 const OrdersNavigator = () => (
-  <Stack.Navigator>
+  <Stack.Navigator mode="modal">
     <Stack.Screen
       name="Orders"
       component={OrdersScreen}

@@ -5,7 +5,7 @@ import CartScreen from "../pages/CartScreen";
 const Stack = createStackNavigator();
 
 const CartNavigator = () => (
-  <Stack.Navigator>
+  <Stack.Navigator mode="modal">
     <Stack.Screen
       name="Cart"
       component={CartScreen}

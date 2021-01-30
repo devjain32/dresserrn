@@ -1,16 +1,59 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
-import Screen from "../components/Screen";
+import {
+  Button,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  Text,
+  Platform,
+  View,
+} from "react-native";
+import * as Yup from "yup";
 
-function WelcomeScreen({ navigation }) {
+import Screen from "../components/Screen";
+import colors from "../config/colors";
+import { Auth } from "aws-amplify";
+
+function WelcomeScreen(props) {
   return (
-    <Screen>
+    <Screen style={styles.container}>
+      {/* <Image style={styles.logo} source={require("../assets/logo-red.png")} /> */}
+      <View style={styles.textBox}>
+        <Text style={styles.text}>dresser</Text>
+      </View>
       <Button
-        title="Login"
-        onPress={() => navigation.navigate("Login")}
-      ></Button>
+        title="Login with Google"
+        onPress={() => Auth.federatedSignIn({ provider: "Google" })}
+      />
     </Screen>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  formBox: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logo: {
+    width: 80,
+    height: 80,
+    alignSelf: "center",
+    marginTop: 50,
+    marginBottom: 20,
+  },
+  text: {
+    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+    color: colors.dark,
+    fontSize: 80,
+  },
+  textBox: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+});
 
 export default WelcomeScreen;
