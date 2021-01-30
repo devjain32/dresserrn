@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "dresser278ea648_identitypool_278ea648",
+    "identityPoolName": "dresser72ee93ac_identitypool_72ee93ac",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "dresse278ea648",
-    "userPoolName": "dresser278ea648_userpool_278ea648",
+    "resourceNameTruncated": "dresse72ee93ac",
+    "userPoolName": "dresser72ee93ac_userpool_72ee93ac",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "dresse278ea648_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "dresse72ee93ac_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "278ea648",
-    "resourceName": "dresser278ea648",
+    "sharedId": "72ee93ac",
+    "resourceName": "dresser72ee93ac",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -47,10 +47,8 @@
     },
     "useDefault": "defaultSocial",
     "hostedUI": true,
-    "usernameAttributes": [
-        "email"
-    ],
-    "hostedUIDomainName": "dresser278ea648-278ea648",
+    "triggers": "{}",
+    "hostedUIDomainName": "dresser72ee93ac-72ee93ac",
     "authProvidersUserPool": [
         "Google"
     ],
@@ -59,5 +57,9 @@
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
     "dependsOn": []
 }

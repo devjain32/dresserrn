@@ -8,6 +8,7 @@ import Icon from "../components/Icon";
 import MenuOpener from "../components/MenuOpener";
 import SectionTitle from "../components/SectionTitle";
 import Profile from "../components/Profile";
+import { Auth } from "aws-amplify"
 
 const menuItems = [
   {
