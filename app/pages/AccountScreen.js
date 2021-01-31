@@ -8,7 +8,7 @@ import Icon from "../components/Icon";
 import MenuOpener from "../components/MenuOpener";
 import SectionTitle from "../components/SectionTitle";
 import Profile from "../components/Profile";
-import { Auth } from "aws-amplify"
+import { Auth } from "aws-amplify";
 
 const menuItems = [
   {
@@ -32,7 +32,7 @@ function AccountScreen({ navigation }) {
     <Screen style={styles.screen}>
       <View style={styles.topPart}>
         <MenuOpener onPress={() => navigation.toggleDrawer()} />
-        <SectionTitle text="dresser" size={50} />
+        <SectionTitle text="account" size={50} />
         <Profile link="https://images.unsplash.com/photo-1611410987022-a30a8ff82da3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" />
       </View>
       <View style={styles.container}>

@@ -9,6 +9,7 @@ import {
   ImageBackground,
   ScrollView,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import Constants from "expo-constants";
 import Screen from "../components/Screen";
@@ -26,7 +27,7 @@ import SortBy from "../components/SortBy";
 import ListModal from "../components/ListModal";
 import { calcTotal, filterLists } from "../config/filter";
 import Card from "../components/Card";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { AntDesign } from "@expo/vector-icons";
 
 function CartScreen({ navigation }) {
   const newList = filterLists(lists, "Jackets");
@@ -35,7 +36,7 @@ function CartScreen({ navigation }) {
     <View style={styles.view}>
       <View style={styles.topPart}>
         <MenuOpener onPress={() => navigation.toggleDrawer()} />
-        <SectionTitle text="cart" size={50} />
+        <SectionTitle icon="cart" text="cart" size={50} />
         <Profile
           onPress={() => navigation.navigate("Account")}
           link="https://images.unsplash.com/photo-1611410987022-a30a8ff82da3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
@@ -48,9 +49,12 @@ function CartScreen({ navigation }) {
         </View>
         <View style={styles.checkout}>
           <View style={styles.checkoutBox}>
-            <TouchableWithoutFeedback>
-              <Text style={{ color: "black" }}>Hello</Text>
-            </TouchableWithoutFeedback>
+            <TouchableOpacity
+              style={styles.touchablebox}
+              onPress={() => navigation.navigate("CheckoutScreen")}
+            >
+              <Text style={{ color: colors.primary }}>checkout</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -59,7 +63,7 @@ function CartScreen({ navigation }) {
         keyExtractor={(listings) => listings.id.toString()}
         numColumns={2}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 200 }}
+        contentContainerStyle={{ paddingBottom: 250 }}
         columnWrapperStyle={styles.column}
         renderItem={({ item }) => (
           <Card
@@ -109,7 +113,7 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginBottom: 20,
     marginTop: 30,
-    height: 80,
+    height: 100,
     borderRadius: 20,
   },
   priceBox: {
@@ -136,10 +140,15 @@ const styles = StyleSheet.create({
   },
   checkoutBox: {
     width: "70%",
-    height: "50%",
-    backgroundColor: "black",
-    opacity: 0.1,
+    height: "60%",
+    backgroundColor: colors.arrowColor,
     borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  touchablebox: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

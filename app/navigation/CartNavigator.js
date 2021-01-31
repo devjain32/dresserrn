@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import CartScreen from "../pages/CartScreen";
 import ItemDetails from "../pages/ItemDetails";
+import CheckoutScreen from "../pages/CheckoutScreen";
 import SectionTitle from "../components/SectionTitle";
 import colors from "../config/colors";
 
@@ -15,12 +16,21 @@ const CartNavigator = () => (
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="Item"
-      component={CartScreen}
+      // name="Item"
+      // component={CartScreen}
       name="ItemDetails"
       component={ItemDetails}
       options={({ route }) => ({
         headerTitle: <SectionTitle text={route.params.title} size={20} />,
+        headerTintColor: colors.secondary,
+      })}
+    />
+    <Stack.Screen
+      name="CheckoutScreen"
+      component={CheckoutScreen}
+      options={({ route }) => ({
+        // headerTitle: <SectionTitle text={route.params.title} size={20} />,
+        headerTitle: "Checkout",
         headerTintColor: colors.secondary,
       })}
     />
