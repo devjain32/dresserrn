@@ -26,6 +26,7 @@ import SortBy from "../components/SortBy";
 import ListModal from "../components/ListModal";
 import { calcTotal, filterLists } from "../config/filter";
 import Card from "../components/Card";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 function CartScreen({ navigation }) {
   const newList = filterLists(lists, "Jackets");
@@ -45,8 +46,12 @@ function CartScreen({ navigation }) {
           <Text style={styles.totalPriceMessage}>Total Price: </Text>
           <Text style={styles.totalPrice}>{"$" + total}</Text>
         </View>
-        <View styles={styles.checkout}>
-          <Text>Hello</Text>
+        <View style={styles.checkout}>
+          <View style={styles.checkoutBox}>
+            <TouchableWithoutFeedback>
+              <Text style={{ color: "black" }}>Hello</Text>
+            </TouchableWithoutFeedback>
+          </View>
         </View>
       </View>
       <FlatList
@@ -62,7 +67,7 @@ function CartScreen({ navigation }) {
             subtitle={"$" + item.price}
             image={item.image}
             onPress={() => navigation.navigate("ItemDetails", item)}
-            onPressDelete={() => console.log("Delete item")}
+            onPressDelete={() => console.log("Delete " + item.title)}
           />
         )}
       />
@@ -125,10 +130,16 @@ const styles = StyleSheet.create({
   },
   checkout: {
     width: "100%",
-    height: 10,
-    backgroundColor: "red",
+    // height: 10,
     justifyContent: "center",
     alignItems: "center",
+  },
+  checkoutBox: {
+    width: "70%",
+    height: "50%",
+    backgroundColor: "black",
+    opacity: 0.1,
+    borderRadius: 10,
   },
 });
 
