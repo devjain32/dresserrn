@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../pages/HomeScreen";
 import Specific from "../pages/Specific";
 import ItemDetails from "../pages/ItemDetails";
+import SearchScreen from "../pages/SearchScreen";
 import SectionTitle from "../components/SectionTitle";
 import { AntDesign } from "@expo/vector-icons";
 import colors from "../config/colors";
@@ -15,6 +16,14 @@ const FeedNavigator = () => (
       name="Home"
       component={HomeScreen}
       options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Search"
+      component={SearchScreen}
+      options={({ route }) => ({
+        // headerTitle: <SectionTitle text={route.params.title} size={20} />,
+        headerTintColor: colors.secondary,
+      })}
     />
     <Stack.Screen
       name="ItemDetails"

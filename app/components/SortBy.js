@@ -49,6 +49,7 @@ function SortBy({ placeholder, data, onSelectItem, selectedItem, navigation }) {
                   onPress={() => {
                     setModalVisible(false);
                     navigation.navigate("Specific", item);
+                    console.log(item);
                   }}
                 />
               )}

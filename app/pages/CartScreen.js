@@ -47,16 +47,14 @@ function CartScreen({ navigation }) {
           <Text style={styles.totalPriceMessage}>Total Price: </Text>
           <Text style={styles.totalPrice}>{"$" + total}</Text>
         </View>
-        <View style={styles.checkout}>
-          <View style={styles.checkoutBox}>
-            <TouchableOpacity
-              style={styles.touchablebox}
-              onPress={() => navigation.navigate("CheckoutScreen")}
-            >
-              <Text style={{ color: colors.primary }}>checkout</Text>
-            </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.touchablebox}
+          onPress={() => navigation.navigate("CheckoutScreen")}
+        >
+          <View style={[styles.checkout, styles.checkoutBox]}>
+            <Text style={{ color: colors.primary }}>checkout</Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
       <FlatList
         data={newList}

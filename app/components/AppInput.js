@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "500",
+    width: "100%",
   },
 });
 

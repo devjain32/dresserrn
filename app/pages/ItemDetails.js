@@ -1,16 +1,25 @@
 import React from "react";
-import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { beginAsyncEvent } from "react-native/Libraries/Performance/Systrace";
 import ListCategories from "../components/ListCategories";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
+import { filterLists } from "../config/filter";
+import lists from "../config/lists";
+import Card from "../components/Card";
+import SectionTitle from "../components/SectionTitle";
 
-function ItemDetails({ route }) {
-  const listing = route.params;
+const Header = ({ listing, navigation }) => {
   return (
-    <View style={styles.screen}>
+    <>
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{ uri: listing.image }} />
       </View>
@@ -20,9 +29,26 @@ function ItemDetails({ route }) {
           <Text style={styles.price}>{"$" + listing.price}</Text>
         </View>
       </View>
-      <ListCategories title={"Category"} subtitle={listing.category} />
-      <ListCategories title={"Brand"} subtitle={listing.brand} />
-      <ListCategories title={"Thrift Store"} subtitle={listing.thriftStore} />
+      <ListCategories
+        title={"Category"}
+        subtitle={listing.category}
+        onPress={() =>
+          navigation.navigate("Specific", { name: listing.category })
+        }
+        // onPress={() => console.log(listing)}
+      />
+      <ListCategories
+        title={"Brand"}
+        subtitle={listing.brand}
+        onPress={() => navigation.navigate("Specific", { name: listing.brand })}
+      />
+      <ListCategories
+        title={"Thrift Store"}
+        subtitle={listing.thriftStore}
+        onPress={() =>
+          navigation.navigate("Specific", { name: listing.thriftStore })
+        }
+      />
       <ListCategories title={"Tags"} tags={listing.tags} />
       <View style={styles.addtocart}>
         {/*This is for the add to cart button. 
@@ -45,6 +71,31 @@ function ItemDetails({ route }) {
           <Text style={styles.cartText}> add to cart</Text>
         </TouchableOpacity>
       </View>
+    </>
+  );
+};
+
+function ItemDetails({ route, navigation }) {
+  const listing = route.params;
+  const newList = filterLists(lists, listing.category);
+  return (
+    <View style={styles.screen}>
+      <FlatList
+        data={newList}
+        keyExtractor={(listings) => listings.id.toString()}
+        numColumns={2}
+        columnWrapperStyle={styles.column}
+        contentContainerStyle={{ paddingBottom: 700 }}
+        renderItem={({ item }) => (
+          <Card
+            title={item.title}
+            subtitle={"$" + item.price}
+            image={item.image}
+            onPress={() => navigation.navigate("ItemDetails", item)}
+          />
+        )}
+        ListHeaderComponent={<Header listing={listing} />}
+      />
     </View>
   );
 }
@@ -91,13 +142,19 @@ const styles = StyleSheet.create({
     height: "5%",
     backgroundColor: colors.arrowColor,
     alignSelf: "center",
-    marginTop: "7%",
+    marginTop: "3%",
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: "4%",
   },
   cartText: {
     color: colors.primary,
+  },
+  column: {
+    justifyContent: "space-between",
+    marginLeft: 20,
+    marginRight: 20,
   },
 });
 
