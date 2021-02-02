@@ -30,7 +30,7 @@ import Card from "../components/Card";
 import { AntDesign } from "@expo/vector-icons";
 
 function CartScreen({ navigation }) {
-  const newList = filterLists(lists, "Jackets");
+  const newList = filterLists(lists, "Hoodies");
   const total = calcTotal(newList);
   return (
     <View style={styles.view}>

@@ -7,6 +7,7 @@ import {
   Text,
   Platform,
   View,
+  TouchableOpacity,
 } from "react-native";
 import * as Yup from "yup";
 
@@ -21,10 +22,18 @@ function WelcomeScreen(props) {
       <View style={styles.textBox}>
         <Text style={styles.text}>dresser</Text>
       </View>
-      <Button
+      <TouchableOpacity
+        onPress={() => Auth.federatedSignIn({ provider: "Google" })}
+      >
+        <Image
+          style={{ width: "50%", resizeMode: "contain", alignSelf: "center" }}
+          source={require("../assets/google.png")}
+        />
+      </TouchableOpacity>
+      {/* <Button
         title="Login with Google"
         onPress={() => Auth.federatedSignIn({ provider: "Google" })}
-      />
+      /> */}
     </Screen>
   );
 }

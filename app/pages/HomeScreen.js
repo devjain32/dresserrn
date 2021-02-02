@@ -14,7 +14,7 @@ async function getItems() {
 
 function HomeScreen({ navigation }) {
   const items = getItems();
-  items.then(console.log);
+  // items.then(console.log);
   return (
     <View style={styles.container}>
       <FlatList
