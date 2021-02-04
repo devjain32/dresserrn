@@ -19,3 +19,7 @@ export const calcTotal = function (newList) {
   }
   return total;
 };
+
+// export const filterSearch = function (objects, keyword) {
+
+// };

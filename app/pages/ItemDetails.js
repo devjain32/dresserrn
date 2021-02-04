@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  ScrollView,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { beginAsyncEvent } from "react-native/Libraries/Performance/Systrace";
@@ -17,9 +18,11 @@ import lists from "../config/lists";
 import Card from "../components/Card";
 import SectionTitle from "../components/SectionTitle";
 
-const Header = ({ listing, navigation }) => {
+function ItemDetails({ route, navigation }) {
+  const listing = route.params;
+  const newList = filterLists(lists, listing.category);
   return (
-    <>
+    <View style={styles.screen}>
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{ uri: listing.image }} />
       </View>
@@ -71,31 +74,6 @@ const Header = ({ listing, navigation }) => {
           <Text style={styles.cartText}> add to cart</Text>
         </TouchableOpacity>
       </View>
-    </>
-  );
-};
-
-function ItemDetails({ route, navigation }) {
-  const listing = route.params;
-  const newList = filterLists(lists, listing.category);
-  return (
-    <View style={styles.screen}>
-      <FlatList
-        data={newList}
-        keyExtractor={(listings) => listings.id.toString()}
-        numColumns={2}
-        columnWrapperStyle={styles.column}
-        contentContainerStyle={{ paddingBottom: 700 }}
-        renderItem={({ item }) => (
-          <Card
-            title={item.title}
-            subtitle={"$" + item.price}
-            image={item.image}
-            onPress={() => navigation.navigate("ItemDetails", item)}
-          />
-        )}
-        ListHeaderComponent={<Header listing={listing} />}
-      />
     </View>
   );
 }

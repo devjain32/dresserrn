@@ -17,14 +17,15 @@ function SearchContainer({ onPress }) {
   return (
     <View style={styles.container}>
       <Feather name="search" color={colors.arrowColor} size={40} />
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={onPress}>
         <View style={styles.searchbox}>
-          <TextInput
+          {/* <TextInput
             style={styles.searchText}
             placeholder={word}
             placeholderTextColor={colors.secondary}
             keyboardType="default"
-          ></TextInput>
+          ></TextInput> */}
+          <Text style={styles.searchText}>{word}</Text>
         </View>
       </TouchableWithoutFeedback>
     </View>

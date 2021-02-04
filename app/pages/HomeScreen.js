@@ -33,6 +33,7 @@ function HomeScreen({ navigation }) {
           />
         )}
         ListHeaderComponent={<HomeScreenHeader navigation={navigation} />}
+        bounces={false}
       />
     </View>
   );

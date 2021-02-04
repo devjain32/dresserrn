@@ -63,6 +63,7 @@ function CartScreen({ navigation }) {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 250 }}
         columnWrapperStyle={styles.column}
+        bounces={false}
         renderItem={({ item }) => (
           <Card
             title={item.title}
