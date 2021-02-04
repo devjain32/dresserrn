@@ -4,10 +4,8 @@ import colors from "../config/colors.js";
 import Card from "../components/Card.js";
 import HomeScreenHeader from "../components/HomeScreenHeader";
 import lists from "../config/lists";
-import { DataStore } from '@aws-amplify/datastore';
-import { Item } from '../../src/models';
-
-
+import { DataStore } from "@aws-amplify/datastore";
+import { Item } from "../../src/models";
 
 async function getItems() {
   const items = await DataStore.query(Item);
@@ -16,7 +14,7 @@ async function getItems() {
 
 function HomeScreen({ navigation }) {
   const items = getItems();
-  items.then(console.log)
+  // items.then(console.log);
   return (
     <View style={styles.container}>
       <FlatList
@@ -29,12 +27,13 @@ function HomeScreen({ navigation }) {
         renderItem={({ item }) => (
           <Card
             title={item.title} // need to switch all these to use the items once I figure out how to incorporate asyncs with the navigator
-            subtitle={"$" + item.price} 
+            subtitle={"$" + item.price}
             image={item.image}
             onPress={() => navigation.navigate("ItemDetails", item)}
           />
         )}
         ListHeaderComponent={<HomeScreenHeader navigation={navigation} />}
+        bounces={false}
       />
     </View>
   );

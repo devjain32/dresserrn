@@ -12,6 +12,7 @@ function Specific({ route, navigation }) {
   return (
     <View style={styles.container}>
       <FlatList
+        bounces={false}
         data={newList}
         contentContainerStyle={styles.list}
         keyExtractor={(listings) => listings.id.toString()}

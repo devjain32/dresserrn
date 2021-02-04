@@ -10,15 +10,10 @@ import {
   ScrollView,
 } from "react-native";
 import Constants from "expo-constants";
-import Screen from "./Screen";
 import SectionTitle from "./SectionTitle";
 import Profile from "./Profile";
 import MenuOpener from "./MenuOpener";
 import SearchContainer from "./SearchContainer";
-import SectionTitleWithButton from "./SectionTitleWithButton";
-import Categories from "./Categories";
-import CategoriesSmall from "./CategoriesSmall";
-import ThriftStores from "./ThriftStores";
 import colors from "../config/colors";
 import lists from "../config/lists";
 import SortBy from "./SortBy";
@@ -34,7 +29,7 @@ function HomeScreen({ navigation }) {
           link="https://images.unsplash.com/photo-1611410987022-a30a8ff82da3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
         />
       </View>
-      <SearchContainer />
+      <SearchContainer onPress={() => navigation.navigate("Search")} />
       <View style={styles.sortby}>
         <SortBy
           placeholder="categories"

@@ -1,24 +1,33 @@
-import React from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableWithoutFeedback,
+} from "react-native";
+import { SearchBar } from "react-native-elements";
 
 import colors from "../config/colors";
 
 import { Feather } from "@expo/vector-icons";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
-function SearchContainer(props) {
+function SearchContainer({ onPress }) {
   const word = "search...";
   return (
     <View style={styles.container}>
       <Feather name="search" color={colors.arrowColor} size={40} />
-      <View style={styles.searchbox}>
-        <TextInput
-          style={styles.searchText}
-          placeholder={word}
-          placeholderTextColor={colors.secondary}
-          keyboardType="default"
-        ></TextInput>
-      </View>
+      <TouchableWithoutFeedback onPress={onPress}>
+        <View style={styles.searchbox}>
+          {/* <TextInput
+            style={styles.searchText}
+            placeholder={word}
+            placeholderTextColor={colors.secondary}
+            keyboardType="default"
+          ></TextInput> */}
+          <Text style={styles.searchText}>{word}</Text>
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 }
@@ -49,6 +58,7 @@ const styles = StyleSheet.create({
   searchText: {
     paddingLeft: 20,
     color: colors.secondary,
+    width: "100%",
   },
 });
 
