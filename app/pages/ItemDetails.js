@@ -20,40 +20,40 @@ import SectionTitle from "../components/SectionTitle";
 
 function ItemDetails({ route, navigation }) {
   const listing = route.params;
-  const newList = filterLists(lists, listing.category);
+  const newList = filterLists(lists, listing.ItemCategory);
   return (
     <View style={styles.screen}>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: listing.image }} />
+        <Image style={styles.image} source={{ uri: listing.Images[0] }} />
       </View>
       <View style={styles.titleprice}>
-        <Text style={styles.title}>{listing.title}</Text>
+        <Text style={styles.title}>{listing.Name}</Text>
         <View style={styles.pricebox}>
-          <Text style={styles.price}>{"$" + listing.price}</Text>
+          <Text style={styles.price}>{"$" + listing.Price}</Text>
         </View>
       </View>
       <ListCategories
         title={"Category"}
-        subtitle={listing.category}
+        subtitle={listing.ItemCAtegory}
         onPress={() =>
-          navigation.navigate("Specific", { name: listing.category })
+          navigation.navigate("Specific", { name: listing.ItemCategory })
         }
         // onPress={() => console.log(listing)}
       />
       <ListCategories
         title={"Brand"}
-        subtitle={listing.brand}
-        onPress={() => navigation.navigate("Specific", { name: listing.brand })}
+        subtitle={listing.Brand}
+        onPress={() => navigation.navigate("Specific", { name: listing.Brand })}
       />
       <ListCategories
         title={"Thrift Store"}
-        subtitle={listing.thriftStore}
+        subtitle={listing.thriftstoreID} // need to query the thriftstores as well so we can access that here based on thriftStoreID
         onPress={() =>
-          navigation.navigate("Specific", { name: listing.thriftStore })
-        }
+          navigation.navigate("Specific", { name: listing.thriftstoreID })
+        } 
       />
-      <ListCategories title={"Tags"} tags={listing.tags} />
-      <View style={styles.addtocart}>
+      <ListCategories title={"Tags"} tags={listing.tags} /* we dont have tags in the current database schema */ /> 
+      <View style={styles.addtocart}> 
         {/*This is for the add to cart button. 
         I need to conditionally render it based on if the item is already in the cart. 
         I'll do that once we load the data and I can view what's already in the cart.*/}
@@ -64,7 +64,7 @@ function ItemDetails({ route, navigation }) {
             alignItems: "center",
             justifyContent: "center",
           }}
-          onPress={() => console.log("Add " + listing.title + " to cart")}
+          onPress={() => console.log("Add " + listing.Name + " to cart")}
         >
           <MaterialCommunityIcons
             name="cart"
