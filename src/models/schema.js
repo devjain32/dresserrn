@@ -316,10 +316,33 @@ export const schema = {
         "ClothingType": {
             "name": "ClothingType",
             "values": [
-                "JACKET",
-                "SUIT",
-                "HOODIE",
-                "PANTS"
+                "SHIRTS",
+                "SWEATSHIRTS",
+                "SWEATPANTS",
+                "TSHIRTS",
+                "POLOS",
+                "SWEATERS",
+                "PANTS",
+                "CHINOS",
+                "SHORTS",
+                "JACKETS",
+                "SUITS",
+                "SWIMWEAR",
+                "CASUAL",
+                "DRESSES",
+                "JUMPSUITS",
+                "SKIRTS",
+                "SHOES",
+                "JEWELRY",
+                "HAIR",
+                "BAGS",
+                "ACCESSORIES",
+                "BELTS",
+                "EYEWEAR",
+                "TIES",
+                "HATS",
+                "BLOUSES",
+                "LEGGINGS"
             ]
         }
     },
