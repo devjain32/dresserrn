@@ -48,7 +48,7 @@ function AccountScreen({ navigation }) {
         <AppInput
           title="Delivery Address"
           subtitle="500 Dulles Ave. Sugar Land, TX 77074"
-          name="home"
+          name="address"
         />
         <View
           style={{ width: "100%", height: 1, backgroundColor: colors.primary }}

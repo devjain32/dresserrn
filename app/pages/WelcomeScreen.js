@@ -38,7 +38,7 @@ function WelcomeScreen(props) {
       </View>
 
       <AppForm	
-        initialValues={{ first_name: "", last_name: "", email: "", phone_number: "", address: "", password: "" }}	
+        initialValues={{ given_name: "", family_name: "", email: "", phone_number: "", address: "", password: "" }}	
         onSubmit={(values) => console.log(values)}	
         validationSchema={validationSchema}	
       >	
@@ -47,7 +47,7 @@ function WelcomeScreen(props) {
           autoCorrect={false}	
           icon="account-circle"	
           keyboardType="default"	
-          name="fist_name"	
+          name="given_name"	
           placeholder="First Name"	
           textContentType="name"	
         />	
@@ -56,7 +56,7 @@ function WelcomeScreen(props) {
           autoCorrect={false}	
           icon="account-circle-outline"	
           keyboardType="default"	
-          name="last_name"	
+          name="family_name"	
           placeholder="Last Name"	
           textContentType="name"	
         />	
