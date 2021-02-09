@@ -20,7 +20,7 @@ import Screen from "../components/Screen";
 import colors from "../config/colors";
 import { Auth } from "aws-amplify";
 
-const phoneRegExp = /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/
+const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
 
 const validationSchema = Yup.object().shape({	
   first_name: Yup.string().required().label("First Name"),
@@ -98,8 +98,8 @@ function WelcomeScreen(props) {
           secureTextEntry	
           textContentType="password"	
         />	
-        <SubmitButton title="Sign Up" />	
-      </AppForm>
+        <SubmitButton title="Sign Up"/>	
+      </AppForm>  
 
       {/* <TouchableOpacity
         onPress={() => Auth.federatedSignIn({ provider: "Google" })}
