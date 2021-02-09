@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, FlatList } from "react-native";
 import colors from "../config/colors.js";
 import Card from "../components/Card.js";
@@ -7,28 +7,33 @@ import lists from "../config/lists";
 import { DataStore } from "@aws-amplify/datastore";
 import { Item } from "../../src/models";
 
-async function getItems() {
-  const items = await DataStore.query(Item);
-  return items;
-}
-
 function HomeScreen({ navigation }) {
-  const items = getItems();
-  // items.then(console.log);
+  
+  const [items, setItems] = useState([]);
+
+  useEffect( () => {
+    const fetchItems = async () => {
+      const itemsResults = await DataStore.query(Item)
+      setItems(itemsResults);
+      console.log(itemsResults);
+    }
+    fetchItems();
+  }, [])
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={lists.listings}
+        data={items}
         contentContainerStyle={styles.list}
-        keyExtractor={(listings) => listings.id.toString()}
+        keyExtractor={(items) => items.id.toString()}
         numColumns={2}
         showsVerticalScrollIndicator={false}
         columnWrapperStyle={styles.column}
         renderItem={({ item }) => (
           <Card
-            title={item.title} // need to switch all these to use the items once I figure out how to incorporate asyncs with the navigator
-            subtitle={"$" + item.price}
-            image={item.image}
+            title={item.Name} 
+            subtitle={"$" + item.Price}
+            image={item.Images[0]} // this will only display the first image
             onPress={() => navigation.navigate("ItemDetails", item)}
           />
         )}

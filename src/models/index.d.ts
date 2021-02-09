@@ -1,10 +1,33 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
 export enum ClothingType {
-  JACKET = "JACKET",
-  SUIT = "SUIT",
-  HOODIE = "HOODIE",
-  PANTS = "PANTS"
+  SHIRTS = "SHIRTS",
+  SWEATSHIRTS = "SWEATSHIRTS",
+  SWEATPANTS = "SWEATPANTS",
+  TSHIRTS = "TSHIRTS",
+  POLOS = "POLOS",
+  SWEATERS = "SWEATERS",
+  PANTS = "PANTS",
+  CHINOS = "CHINOS",
+  SHORTS = "SHORTS",
+  JACKETS = "JACKETS",
+  SUITS = "SUITS",
+  SWIMWEAR = "SWIMWEAR",
+  CASUAL = "CASUAL",
+  DRESSES = "DRESSES",
+  JUMPSUITS = "JUMPSUITS",
+  SKIRTS = "SKIRTS",
+  SHOES = "SHOES",
+  JEWELRY = "JEWELRY",
+  HAIR = "HAIR",
+  BAGS = "BAGS",
+  ACCESSORIES = "ACCESSORIES",
+  BELTS = "BELTS",
+  EYEWEAR = "EYEWEAR",
+  TIES = "TIES",
+  HATS = "HATS",
+  BLOUSES = "BLOUSES",
+  LEGGINGS = "LEGGINGS"
 }
 
 
