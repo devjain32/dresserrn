@@ -96,7 +96,7 @@ function WelcomeScreen(props) {
           secureTextEntry	
           textContentType="password"	
         />	
-        <SubmitButton title="Login" />	
+        <SubmitButton title="Sign Up" />	
       </AppForm>
 
       {/* <TouchableOpacity
