@@ -15,7 +15,7 @@ function HomeScreen({ navigation }) {
     const fetchItems = async () => {
       const itemsResults = await DataStore.query(Item)
       setItems(itemsResults);
-      console.log(itemsResults);
+      //console.log(itemsResults);
     }
     fetchItems();
   }, [])
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // padding: 20,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
     flexDirection: "row",
     backgroundColor: colors.backgroundColor,
     paddingBottom: 25,
