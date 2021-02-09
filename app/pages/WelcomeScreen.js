@@ -13,56 +13,77 @@ import * as Yup from "yup";
 
 import Screen from "../components/Screen";
 import colors from "../config/colors";
+import appStyles from "../config/styles";
 import { Auth } from "aws-amplify";
+import Constants from "expo-constants";
+import { BlurView } from "expo-blur";
 
 function WelcomeScreen(props) {
   return (
-    <Screen style={styles.container}>
-      {/* <Image style={styles.logo} source={require("../assets/logo-red.png")} /> */}
-      <View style={styles.textBox}>
-        <Text style={styles.text}>dresser</Text>
-      </View>
-      <TouchableOpacity
-        onPress={() => Auth.federatedSignIn({ provider: "Google" })}
+    <>
+      <View
+        style={{
+          width: "100%",
+          height: 150,
+          justifyContent: "flex-end",
+          alignItems: "center",
+          backgroundColor: "#EC5E3A",
+        }}
       >
-        <Image
-          style={{ width: "50%", resizeMode: "contain", alignSelf: "center" }}
-          source={require("../assets/google.png")}
-        />
-      </TouchableOpacity>
-      {/* <Button
-        title="Login with Google"
-        onPress={() => Auth.federatedSignIn({ provider: "Google" })}
-      /> */}
-    </Screen>
+        <Text
+          style={{
+            fontSize: 80,
+            fontFamily: appStyles.fontFamily,
+            color: "#FFD280",
+          }}
+        >
+          dresser
+        </Text>
+      </View>
+      <View
+        style={{
+          width: "100%",
+          height: "40%",
+          backgroundColor: "#FFD280",
+          borderBottomRightRadius: 40,
+          borderBottomLeftRadius: 40,
+        }}
+      >
+        <ImageBackground
+          source={require("../assets/cycling-crop.png")}
+          style={{ width: "100%", height: "100%", resizeMode: "center" }}
+        ></ImageBackground>
+      </View>
+      <View
+        style={{
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          height: 300,
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => Auth.federatedSignIn({ provider: "Google" })}
+          style={{
+            width: "50%",
+            height: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Image
+            style={{
+              width: "80%",
+              resizeMode: "contain",
+            }}
+            source={require("../assets/google.png")}
+          />
+        </TouchableOpacity>
+      </View>
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-  },
-  formBox: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  logo: {
-    width: 80,
-    height: 80,
-    alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
-  },
-  text: {
-    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-    color: colors.dark,
-    fontSize: 80,
-  },
-  textBox: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 10,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default WelcomeScreen;

@@ -1,33 +1,35 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import {
-  SafeAreaView,
   StyleSheet,
   View,
   Platform,
   Text,
-  Image,
-  ImageBackground,
-  ScrollView,
   FlatList,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import Constants from "expo-constants";
-import Screen from "../components/Screen";
 import SectionTitle from "../components/SectionTitle";
 import Profile from "../components/Profile";
 import MenuOpener from "../components/MenuOpener";
-import SearchContainer from "../components/SearchContainer";
-import SectionTitleWithButton from "../components/SectionTitleWithButton";
-import Categories from "../components/Categories";
-import CategoriesSmall from "../components/CategoriesSmall";
-import ThriftStores from "../components/ThriftStores";
 import colors from "../config/colors";
 import lists from "../config/lists";
-import SortBy from "../components/SortBy";
-import ListModal from "../components/ListModal";
 import { calcTotal, filterLists } from "../config/filter";
 import Card from "../components/Card";
-import { AntDesign } from "@expo/vector-icons";
+import { loadStripe } from "@stripe/stripe-js";
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+// import Screen from "../components/Screen";
+// import SearchContainer from "../components/SearchContainer";
+// import SectionTitleWithButton from "../components/SectionTitleWithButton";
+// import Categories from "../components/Categories";
+// import CategoriesSmall from "../components/CategoriesSmall";
+// import ThriftStores from "../components/ThriftStores";
+// import SortBy from "../components/SortBy";
+// import ListModal from "../components/ListModal";
+// import { AntDesign } from "@expo/vector-icons";
+// const stripePromise = loadStripe("pk_test_1wNpFTTZfCE6ziX8TdxmPpvp00tOQHsHPj");
 
 function CartScreen({ navigation }) {
   const newList = filterLists(lists, "Hoodies");
@@ -55,6 +57,12 @@ function CartScreen({ navigation }) {
             <Text style={{ color: colors.primary }}>checkout</Text>
           </View>
         </TouchableOpacity>
+        {/* <Button
+          type="button"
+          role="link"
+          title="Checkout"
+          onClick={handleClick}
+        /> */}
       </View>
       <FlatList
         data={newList}

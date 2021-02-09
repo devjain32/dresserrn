@@ -1,8 +1,31 @@
 enum ClothingType {
-  JACKET
-  SUIT
-  HOODIE
+  SHIRTS
+  SWEATSHIRTS
+  SWEATPANTS
+  TSHIRTS
+  POLOS
+  SWEATERS
   PANTS
+  CHINOS
+  SHORTS
+  JACKETS
+  SUITS
+  SWIMWEAR
+  CASUAL
+  DRESSES
+  JUMPSUITS
+  SKIRTS
+  SHOES
+  JEWELRY
+  HAIR
+  BAGS
+  ACCESSORIES
+  BELTS
+  EYEWEAR
+  TIES
+  HATS
+  BLOUSES
+  LEGGINGS
 }
 
 type Metrics @model @auth(rules: [{allow: public}]) {

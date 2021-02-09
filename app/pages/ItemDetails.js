@@ -12,7 +12,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { beginAsyncEvent } from "react-native/Libraries/Performance/Systrace";
 import ListCategories from "../components/ListCategories";
 import Screen from "../components/Screen";
-import colors from "../config/colors";
+import appStyles from "../config/styles";
 import { filterLists } from "../config/filter";
 import lists from "../config/lists";
 import Card from "../components/Card";
@@ -53,26 +53,28 @@ function ItemDetails({ route, navigation }) {
         }
       />
       <ListCategories title={"Tags"} tags={listing.tags} />
-      <View style={styles.addtocart}>
-        {/*This is for the add to cart button. 
+      <View style={styles.cartContainer}>
+        <View style={styles.addtocart}>
+          {/*This is for the add to cart button. 
         I need to conditionally render it based on if the item is already in the cart. 
         I'll do that once we load the data and I can view what's already in the cart.*/}
-        <TouchableOpacity
-          style={{
-            flexDirection: "row",
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onPress={() => console.log("Add " + listing.title + " to cart")}
-        >
-          <MaterialCommunityIcons
-            name="cart"
-            size={20}
-            color={colors.primary}
-          />
-          <Text style={styles.cartText}> add to cart</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            onPress={() => console.log("Add " + listing.title + " to cart")}
+          >
+            <MaterialCommunityIcons
+              name="cart"
+              size={20}
+              color={appStyles.colors.primary}
+            />
+            <Text style={styles.cartText}> add to cart</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -102,37 +104,43 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    color: colors.secondary,
+    color: appStyles.colors.secondary,
     marginLeft: 10,
   },
   price: {
     fontSize: 18,
-    color: colors.arrowColor,
+    color: appStyles.colors.arrowColor,
   },
   pricebox: {
-    backgroundColor: colors.primary,
+    backgroundColor: appStyles.colors.primary,
     padding: 10,
     marginRight: 10,
     borderRadius: 6,
   },
   addtocart: {
     width: "80%",
-    height: "5%",
-    backgroundColor: colors.arrowColor,
+    height: 50,
+    backgroundColor: appStyles.colors.arrowColor,
     alignSelf: "center",
-    marginTop: "3%",
-    borderRadius: 10,
+    borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: "4%",
   },
   cartText: {
-    color: colors.primary,
+    color: appStyles.colors.primary,
+    fontSize: 20,
+    fontFamily: appStyles.fontFamily,
   },
   column: {
     justifyContent: "space-between",
     marginLeft: 20,
     marginRight: 20,
+  },
+  cartContainer: {
+    height: "30%",
+    width: "100%",
+    flexDirection: "column-reverse",
+    paddingBottom: 20,
   },
 });
 

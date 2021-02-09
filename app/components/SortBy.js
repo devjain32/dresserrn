@@ -63,10 +63,6 @@ function SortBy({ placeholder, data, onSelectItem, selectedItem, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: colors.backgroundColor,
-    elevation: 2,
-  },
   container: {
     backgroundColor: colors.primary,
     padding: 10,
