@@ -20,12 +20,14 @@ import Screen from "../components/Screen";
 import colors from "../config/colors";
 import { Auth } from "aws-amplify";
 
+const phoneRegExp = /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/
+
 const validationSchema = Yup.object().shape({	
-  first_name: Yup.string().required().email().label("First Name"),
-  last_name: Yup.string().required().email().label("Last Name"),
+  first_name: Yup.string().required().label("First Name"),
+  last_name: Yup.string().required().label("Last Name"),
   email: Yup.string().required().email().label("Email"),
-  phone_number: Yup.string().required().email().label("Phone Number"),
-  address: Yup.string().required().email().label("Delivery Address"),	
+  phone_number: Yup.string().required().matches(phoneRegExp, 'Phone number is not valid').label("Phone Number"),
+  address: Yup.string().required().label("Delivery Address"),	
   password: Yup.string().required().min(4).label("Password"),	
 });
 
@@ -49,7 +51,7 @@ function WelcomeScreen(props) {
           keyboardType="default"	
           name="given_name"	
           placeholder="First Name"	
-          textContentType="name"	
+          textContentType="givenName"	
         />	
         <AppFormField	
           autoCapitalize="none"	
@@ -58,7 +60,7 @@ function WelcomeScreen(props) {
           keyboardType="default"	
           name="family_name"	
           placeholder="Last Name"	
-          textContentType="name"	
+          textContentType="familyName"	
         />	
         <AppFormField	
           autoCapitalize="none"	
@@ -73,16 +75,16 @@ function WelcomeScreen(props) {
           autoCapitalize="none"	
           autoCorrect={false}	
           icon="phone"	
-          keyboardType="phone-number"	
+          keyboardType="phone-pad"	
           name="phone_number"	
           placeholder="Phone Number"	
-          textContentType="phoneNumber"	
+          textContentType="telephoneNumber"	
         />	
         <AppFormField	
           autoCapitalize="none"	
           autoCorrect={false}	
           icon="map-marker"	
-          keyboardType="address"	
+          keyboardType="default"	
           name="address"	
           placeholder="Delivery Address"	
           textContentType="fullStreetAddress"	
