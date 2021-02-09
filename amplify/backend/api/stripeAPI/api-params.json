@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/checkout",
+            "lambdaFunction": "stripeCheckout",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/checkout"
+        }
+    ],
+    "resourceName": "stripeAPI",
+    "apiName": "stripeAPI",
+    "functionArns": [
+        {
+            "lambdaFunction": "stripeCheckout"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-dresser-staging-220455-authRole",
+        "unAuthRoleName": "amplify-dresser-staging-220455-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "stripeCheckout",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
