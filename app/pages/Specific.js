@@ -23,7 +23,7 @@ function Specific({ route, navigation }) {
             title={item.title}
             subtitle={"$" + item.price}
             image={item.image}
-            onPress={() => navigation.navigate("ItemDetails", item)}
+            onPress={() => navigation.push("ItemDetails", item)}
           />
         )}
         // ListHeaderComponent={<SpecificHeader name={category.name} />}

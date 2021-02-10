@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.primary,
   },
   modalContainer: {
     flex: 1,

@@ -8,17 +8,16 @@ import { DataStore } from "@aws-amplify/datastore";
 import { Item } from "../../src/models";
 
 function HomeScreen({ navigation }) {
-  
   const [items, setItems] = useState([]);
 
-  useEffect( () => {
+  useEffect(() => {
     const fetchItems = async () => {
-      const itemsResults = await DataStore.query(Item)
+      const itemsResults = await DataStore.query(Item);
       setItems(itemsResults);
       //console.log(itemsResults);
-    }
+    };
     fetchItems();
-  }, [])
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -31,10 +30,10 @@ function HomeScreen({ navigation }) {
         columnWrapperStyle={styles.column}
         renderItem={({ item }) => (
           <Card
-            title={item.Name} 
+            title={item.Name}
             subtitle={"$" + item.Price}
             image={item.Images[0]} // this will only display the first image
-            onPress={() => navigation.navigate("ItemDetails", item)}
+            onPress={() => navigation.push("ItemDetails", item)}
           />
         )}
         ListHeaderComponent={<HomeScreenHeader navigation={navigation} />}
