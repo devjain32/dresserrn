@@ -36,20 +36,20 @@ function ItemDetails({ route, navigation }) {
         title={"Category"}
         subtitle={listing.ItemCAtegory}
         onPress={() =>
-          navigation.navigate("Specific", { name: listing.ItemCategory })
+          navigation.push("Specific", { name: listing.ItemCategory })
         }
         // onPress={() => console.log(listing)}
       />
       <ListCategories
         title={"Brand"}
         subtitle={listing.Brand}
-        onPress={() => navigation.navigate("Specific", { name: listing.Brand })}
+        onPress={() => navigation.push("Specific", { name: listing.Brand })}
       />
       <ListCategories
         title={"Thrift Store"}
         subtitle={listing.thriftstoreID} // need to query the thriftstores as well so we can access that here based on thriftStoreID
         onPress={() =>
-          navigation.navigate("Specific", { name: listing.thriftstoreID })
+          navigation.push("Specific", { name: listing.thriftstoreID })
         }
       />
       <ListCategories title={"Tags"} tags={listing.tags} />
@@ -75,16 +75,16 @@ function ItemDetails({ route, navigation }) {
             <Text style={styles.cartText}> add to cart</Text>
           </TouchableOpacity>
         </View>
-        <ListCategories
+        {/* <ListCategories
           title={"Tags"}
           tags={
             listing.tags
-          } /* we dont have tags in the current database schema */
+          }  we dont have tags in the current database schema 
         />
         <View style={styles.addtocart}>
-          {/*This is for the add to cart button. 
+          This is for the add to cart button. 
         I need to conditionally render it based on if the item is already in the cart. 
-        I'll do that once we load the data and I can view what's already in the cart.*/}
+        I'll do that once we load the data and I can view what's already in the cart.
           <TouchableOpacity
             style={{
               flexDirection: "row",
@@ -97,11 +97,11 @@ function ItemDetails({ route, navigation }) {
             <MaterialCommunityIcons
               name="cart"
               size={20}
-              color={colors.primary}
+              color={appStyles.colors.primary}
             />
             <Text style={styles.cartText}> add to cart</Text>
-          </TouchableOpacity>
-        </View>
+          </TouchableOpacity> 
+        </View> */}
       </View>
     </View>
   );
