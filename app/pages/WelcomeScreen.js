@@ -20,6 +20,7 @@ import appStyles from "../config/styles";
 import { Auth } from "aws-amplify";
 import Constants from "expo-constants";
 import { BlurView } from "expo-blur";
+import { TouchableOpacity } from "react-native";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -75,6 +76,13 @@ function WelcomeScreen({ navigation }) {
             />
             <SubmitButton title="Log In" />
           </AppForm>
+          <TouchableOpacity onPress={() => console.log("Forgot Password")}>
+            <View style={styles.forgotContainer}>
+              <Text style={{ color: colors.primary, fontSize: 15 }}>
+                Forgot Password
+              </Text>
+            </View>
+          </TouchableOpacity>
           <AppButton
             title={"Don't have an account? Sign Up"}
             onPress={() => navigation.navigate("Signup")}
@@ -96,6 +104,9 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontSize: 80,
     fontWeight: "bold",
+  },
+  forgotContainer: {
+    marginVertical: 10,
   },
 });
 
