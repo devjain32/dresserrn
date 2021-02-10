@@ -15,11 +15,11 @@ import { Auth } from "aws-amplify";
 import Constants from "expo-constants";
 import { BlurView } from "expo-blur";
 
-const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
+const phoneRegExp = /^(\+\d{1,2})?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
 
 const validationSchema = Yup.object().shape({
-  given_name: Yup.string().required().label("First Name"),
-  family_name: Yup.string().required().label("Last Name"),
+  first_name: Yup.string().required().label("First Name"),
+  last_name: Yup.string().required().label("Last Name"),
   email: Yup.string().required().email().label("Email"),
   phone_number: Yup.string()
     .required()
@@ -52,8 +52,8 @@ function SignupScreen({ navigation }) {
           <Text style={styles.name}>Dresser</Text>
           <AppForm
             initialValues={{
-              given_name: "",
-              family_name: "",
+              first_name: "",
+              last_name: "",
               email: "",
               phone_number: "",
               address: "",
@@ -67,7 +67,7 @@ function SignupScreen({ navigation }) {
               autoCorrect={false}
               icon="account-circle"
               keyboardType="default"
-              name="given_name"
+              name="first_name"
               placeholder="First Name"
               textContentType="givenName"
             />
@@ -76,7 +76,7 @@ function SignupScreen({ navigation }) {
               autoCorrect={false}
               icon="account-circle-outline"
               keyboardType="default"
-              name="family_name"
+              name="last_name"
               placeholder="Last Name"
               textContentType="familyName"
             />
