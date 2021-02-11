@@ -22,13 +22,12 @@ import Constants from "expo-constants";
 import { BlurView } from "expo-blur";
 import { Keyboard } from "react-native";
 
-// const phoneRegExp = /^(\+\d{1,2})?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
-
 const validationSchema = Yup.object().shape({
   input_code: Yup.string().required().label("Input Code"),
 });
 
-function ConfirmScreen({ navigation }) {
+function ConfirmScreen({ route, navigation }) {
+  const { userEmail, userPassword } = route.params;
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -49,12 +48,21 @@ function ConfirmScreen({ navigation }) {
               padding: 15,
             }}
           >
-            <Text style={styles.name}>Confirm your Number</Text>
+            <Text style={styles.name}>Confirm your Email</Text>
             <AppForm
               initialValues={{
                 input_code: "",
               }}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={(values) => {
+                async function confirmSignUp() {
+                  try {
+                    await Auth.confirmSignUp(userEmail, values.input_code);
+                  } catch (error) {
+                      console.log('error confirming sign up', error);
+                  }
+                }
+                confirmSignUp().then(Auth.signIn(userEmail, userPassword));
+              }}
               validationSchema={validationSchema}
             >
               <AppFormField
@@ -70,7 +78,17 @@ function ConfirmScreen({ navigation }) {
             </AppForm>
             <AppButton
               title={"Resend Code"}
-              onPress={() => console.log("Resend code")}
+              onPress={() => {
+                async function resendConfirmationCode() {
+                  try {
+                      await Auth.resendSignUp(userEmail);
+                      console.log('code resent successfully');
+                  } catch (err) {
+                      console.log('error resending code: ', err);
+                  }
+                }
+                resendConfirmationCode();
+              }}
               color="arrowColor"
             />
           </View>

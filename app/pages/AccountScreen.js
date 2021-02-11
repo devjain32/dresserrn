@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
+import { Button } from 'react-native-elements';
 
 import Screen from "../components/Screen";
 import colors from "../config/colors";
@@ -55,7 +56,7 @@ function AccountScreen({ navigation }) {
         />
         <AppInput title="Phone Number" subtitle="(832) 523-1603" name="phone" />
       </View>
-      <ListItem title="Logout" name="logout" />
+      <Button title="Logout" name="logout" onPress={() => Auth.signOut()}/>
     </Screen>
   );
 }

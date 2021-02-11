@@ -89,83 +89,18 @@ function SignupScreen({ navigation }) {
                     console.log("error signing up:", error);
                   }
                 }
-                //signUp();
+                signUp().then(navigation.navigate("Confirm", { userEmail: values.email, userPassword: values.password }));
               }}
               validationSchema={validationSchema}
             >
-              <Text style={styles.name}>Dresser</Text>
-              <AppForm
-                initialValues={{
-                  first_name: "",
-                  last_name: "",
-                  email: "",
-                  phone_number: "",
-                  address: "",
-                  password: "",
-                }}
-                onSubmit={(values) => console.log(values)}
-                validationSchema={validationSchema}
-              >
-                <AppFormField
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  icon="account-circle"
-                  keyboardType="default"
-                  name="first_name"
-                  placeholder="First Name"
-                  textContentType="givenName"
-                />
-                <AppFormField
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  icon="account-circle-outline"
-                  keyboardType="default"
-                  name="last_name"
-                  placeholder="Last Name"
-                  textContentType="familyName"
-                />
-                <AppFormField
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  icon="email"
-                  keyboardType="email-address"
-                  name="email"
-                  placeholder="Email"
-                  textContentType="emailAddress"
-                />
-                <AppFormField
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  icon="phone"
-                  keyboardType="phone-pad"
-                  name="phone_number"
-                  placeholder="Phone Number"
-                  textContentType="telephoneNumber"
-                />
-                <AppFormField
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  icon="map-marker"
-                  keyboardType="default"
-                  name="address"
-                  placeholder="Delivery Address"
-                  textContentType="fullStreetAddress"
-                />
-                <AppFormField
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  icon="lock"
-                  name="password"
-                  placeholder="Password"
-                  secureTextEntry
-                  textContentType="password"
-                />
-                <SubmitButton title="Sign Up" />
-              </AppForm>
-              <AppButton
-                title={"Back to Login"}
-                onPress={() => navigation.navigate("Welcome")}
-                color="arrowColor"
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                icon="account-circle"
+                keyboardType="default"
+                name="first_name"
+                placeholder="First Name"
+                textContentType="givenName"
               />
               <AppFormField
                 autoCapitalize="none"
