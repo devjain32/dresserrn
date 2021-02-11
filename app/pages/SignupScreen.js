@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, View, ImageBackground, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ImageBackground,
+  Text,
+  TouchableWithoutFeedback,
+} from "react-native";
 import * as Yup from "yup";
 
 import AppForm from "../components/Forms/AppForm";
@@ -14,6 +20,7 @@ import appStyles from "../config/styles";
 import { Auth } from "aws-amplify";
 import Constants from "expo-constants";
 import { BlurView } from "expo-blur";
+import { Keyboard } from "react-native";
 
 const phoneRegExp = /^(\+\d{1,2})?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}\s?$/;
 
@@ -30,117 +37,183 @@ const validationSchema = Yup.object().shape({
 
 function SignupScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../assets/loginscreenbg.jpg")}
-        style={{
-          width: "100%",
-          height: "100%",
-          resizeMode: "contain",
-        }}
-      >
-        <View
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <ImageBackground
+          source={require("../assets/loginscreenbg.jpg")}
           style={{
             width: "100%",
             height: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 15,
+            resizeMode: "contain",
           }}
         >
-          <Text style={styles.name}>Dresser</Text>
-          <AppForm
-            initialValues={{
-              first_name: "",
-              last_name: "",
-              email: "",
-              phone_number: "",
-              password: "",
+          <View
+            style={{
+              width: "100%",
+              height: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 15,
             }}
-            onSubmit={(values) => {
-              if(values.phone_number.charAt(0) != '+') {
-                values.phone_number = values.phone_number.match(/\d/g);
-                values.phone_number = values.phone_number.join("");
-                values.phone_number = "+1" + values.phone_number; // fine for now since assuming the number will be a USA number
-              }
-              console.log(values.phone_number)
-              async function signUp() {
-                try {
-                    // const { user } = await Auth.signUp({
-                    //     username: values.email,
-                    //     password: values.password,
-                    //     attributes: {
-                    //         email: values.email,
-                    //         phone_number: values.phone_number,   // optional - E.164 number convention
-                    //         given_name: values.first_name,
-                    //         family_name: values.last_name,
-                    //     }
-                    // });
-                    // console.log(user);
-                    navigation.navigate("Confirm")
-                } catch (error) {
-                    //console.log('error signing up:', error);
-                }
-              }
-              signUp();
-            }}
-            validationSchema={validationSchema}
           >
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="account-circle"
-              keyboardType="default"
-              name="first_name"
-              placeholder="First Name"
-              textContentType="givenName"
+            <Text style={styles.name}>Dresser</Text>
+            <AppForm
+              initialValues={{
+                first_name: "",
+                last_name: "",
+                email: "",
+                phone_number: "",
+                password: "",
+              }}
+              onSubmit={(values) => {
+                if (values.phone_number.charAt(0) != "+") {
+                  values.phone_number = values.phone_number.match(/\d/g);
+                  values.phone_number = values.phone_number.join("");
+                  values.phone_number = "+1" + values.phone_number; // fine for now since assuming the number will be a USA number
+                }
+                console.log(values.phone_number);
+                async function signUp() {
+                  try {
+                    const { user } = await Auth.signUp({
+                      username: values.email,
+                      password: values.password,
+                      attributes: {
+                        email: values.email,
+                        phone_number: values.phone_number, // optional - E.164 number convention
+                        given_name: values.first_name,
+                        family_name: values.last_name,
+                      },
+                    });
+                    console.log(user);
+                  } catch (error) {
+                    console.log("error signing up:", error);
+                  }
+                }
+                //signUp();
+              }}
+              validationSchema={validationSchema}
+            >
+              <Text style={styles.name}>Dresser</Text>
+              <AppForm
+                initialValues={{
+                  first_name: "",
+                  last_name: "",
+                  email: "",
+                  phone_number: "",
+                  address: "",
+                  password: "",
+                }}
+                onSubmit={(values) => console.log(values)}
+                validationSchema={validationSchema}
+              >
+                <AppFormField
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  icon="account-circle"
+                  keyboardType="default"
+                  name="first_name"
+                  placeholder="First Name"
+                  textContentType="givenName"
+                />
+                <AppFormField
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  icon="account-circle-outline"
+                  keyboardType="default"
+                  name="last_name"
+                  placeholder="Last Name"
+                  textContentType="familyName"
+                />
+                <AppFormField
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  icon="email"
+                  keyboardType="email-address"
+                  name="email"
+                  placeholder="Email"
+                  textContentType="emailAddress"
+                />
+                <AppFormField
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  icon="phone"
+                  keyboardType="phone-pad"
+                  name="phone_number"
+                  placeholder="Phone Number"
+                  textContentType="telephoneNumber"
+                />
+                <AppFormField
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  icon="map-marker"
+                  keyboardType="default"
+                  name="address"
+                  placeholder="Delivery Address"
+                  textContentType="fullStreetAddress"
+                />
+                <AppFormField
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  icon="lock"
+                  name="password"
+                  placeholder="Password"
+                  secureTextEntry
+                  textContentType="password"
+                />
+                <SubmitButton title="Sign Up" />
+              </AppForm>
+              <AppButton
+                title={"Back to Login"}
+                onPress={() => navigation.navigate("Welcome")}
+                color="arrowColor"
+              />
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                icon="account-circle-outline"
+                keyboardType="default"
+                name="last_name"
+                placeholder="Last Name"
+                textContentType="familyName"
+              />
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                icon="email"
+                keyboardType="email-address"
+                name="email"
+                placeholder="Email"
+                textContentType="emailAddress"
+              />
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                icon="phone"
+                keyboardType="phone-pad"
+                name="phone_number"
+                placeholder="Phone Number"
+                textContentType="telephoneNumber"
+              />
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                icon="lock"
+                name="password"
+                placeholder="Password"
+                secureTextEntry
+                textContentType="password"
+              />
+              <SubmitButton title="Sign Up" />
+            </AppForm>
+            <AppButton
+              title={"Back to Login"}
+              onPress={() => navigation.navigate("Welcome")}
+              color="arrowColor"
             />
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="account-circle-outline"
-              keyboardType="default"
-              name="last_name"
-              placeholder="Last Name"
-              textContentType="familyName"
-            />
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="email"
-              keyboardType="email-address"
-              name="email"
-              placeholder="Email"
-              textContentType="emailAddress"
-            />
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="phone"
-              keyboardType="phone-pad"
-              name="phone_number"
-              placeholder="Phone Number"
-              textContentType="telephoneNumber"
-            />
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="lock"
-              name="password"
-              placeholder="Password"
-              secureTextEntry
-              textContentType="password"
-            />
-            <SubmitButton title="Sign Up" />
-          </AppForm>
-          <AppButton
-            title={"Back to Login"}
-            onPress={() => navigation.navigate("Welcome")}
-            color="arrowColor"
-          />
-        </View>
-      </ImageBackground>
-    </View>
+          </View>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
