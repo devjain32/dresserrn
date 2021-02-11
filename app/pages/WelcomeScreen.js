@@ -56,7 +56,19 @@ function WelcomeScreen({ navigation }) {
                 email: "",
                 password: "",
               }}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={(values) => {
+                async function signIn() {
+                  try {
+                    const user = await Auth.signIn(
+                      values.email,
+                      values.password
+                    );
+                  } catch (error) {
+                    console.log("error signing in", error);
+                  }
+                }
+                signIn();
+              }}
               validationSchema={validationSchema}
             >
               <AppFormField
@@ -94,6 +106,23 @@ function WelcomeScreen({ navigation }) {
             <AppButton
               title={"Confirm Screen"}
               onPress={() => navigation.navigate("Confirm")}
+              color="arrowColor"
+            />
+            <SubmitButton title="Log In" />
+            <TouchableOpacity
+              onPress={() => {
+                console.log("Forgot Password");
+              }}
+            >
+              <View style={styles.forgotContainer}>
+                <Text style={{ color: colors.primary, fontSize: 15 }}>
+                  Forgot Password
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <AppButton
+              title={"Don't have an account? Sign Up"}
+              onPress={() => navigation.navigate("Signup")}
               color="arrowColor"
             />
           </View>

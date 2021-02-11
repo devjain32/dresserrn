@@ -35,7 +35,14 @@
       ]
     }
   },
-  "auth": {},
+  "auth": {
+    "dresser63d579df": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
   "function": {
     "stripeCheckout": {
       "build": true,

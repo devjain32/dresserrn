@@ -5,12 +5,16 @@ import AppNavigator from "./app/navigation/AppNavigator";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import Amplify, { Auth } from "aws-amplify";
 import awsconfig from "./src/aws-exports";
+import { withAuthenticator } from 'aws-amplify-react-native';
+
 Amplify.configure(awsconfig);
 
-export default function App() {
+function App() {
   return (
     <NavigationContainer theme={navigationTheme}>
       <AuthNavigator />
     </NavigationContainer>
   );
 }
+
+export default App;
