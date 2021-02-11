@@ -5,6 +5,7 @@ import {
   ScrollView,
   Text,
   ImageBackground,
+  TouchableWithoutFeedback,
 } from "react-native";
 import * as Yup from "yup";
 
@@ -21,6 +22,7 @@ import { Auth } from "aws-amplify";
 import Constants from "expo-constants";
 import { BlurView } from "expo-blur";
 import { TouchableOpacity } from "react-native";
+import { Keyboard } from "react-native";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -29,68 +31,75 @@ const validationSchema = Yup.object().shape({
 
 function WelcomeScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../assets/loginscreenbg.jpg")}
-        style={{
-          width: "100%",
-          height: "100%",
-          resizeMode: "contain",
-        }}
-      >
-        <View
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <ImageBackground
+          source={require("../assets/loginscreenbg.jpg")}
           style={{
             width: "100%",
             height: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 15,
+            resizeMode: "contain",
           }}
         >
-          <Text style={styles.name}>Dresser</Text>
-          <AppForm
-            initialValues={{
-              email: "",
-              password: "",
+          <View
+            style={{
+              width: "100%",
+              height: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 15,
             }}
-            onSubmit={(values) => console.log(values)}
-            validationSchema={validationSchema}
           >
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="email"
-              keyboardType="email-address"
-              name="email"
-              placeholder="Email"
-              textContentType="emailAddress"
+            <Text style={styles.name}>Dresser</Text>
+            <AppForm
+              initialValues={{
+                email: "",
+                password: "",
+              }}
+              onSubmit={(values) => console.log(values)}
+              validationSchema={validationSchema}
+            >
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                icon="email"
+                keyboardType="email-address"
+                name="email"
+                placeholder="Email"
+                textContentType="emailAddress"
+              />
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                icon="lock"
+                name="password"
+                placeholder="Password"
+                secureTextEntry
+                textContentType="password"
+              />
+              <SubmitButton title="Log In" />
+            </AppForm>
+            <TouchableOpacity onPress={() => console.log("Forgot Password")}>
+              <View style={styles.forgotContainer}>
+                <Text style={{ color: colors.primary, fontSize: 15 }}>
+                  Forgot Password
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <AppButton
+              title={"Don't have an account? Sign Up"}
+              onPress={() => navigation.navigate("Signup")}
+              color="arrowColor"
             />
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="lock"
-              name="password"
-              placeholder="Password"
-              secureTextEntry
-              textContentType="password"
+            <AppButton
+              title={"Confirm Screen"}
+              onPress={() => navigation.navigate("Confirm")}
+              color="arrowColor"
             />
-            <SubmitButton title="Log In" />
-          </AppForm>
-          <TouchableOpacity onPress={() => console.log("Forgot Password")}>
-            <View style={styles.forgotContainer}>
-              <Text style={{ color: colors.primary, fontSize: 15 }}>
-                Forgot Password
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <AppButton
-            title={"Don't have an account? Sign Up"}
-            onPress={() => navigation.navigate("Signup")}
-            color="arrowColor"
-          />
-        </View>
-      </ImageBackground>
-    </View>
+          </View>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
