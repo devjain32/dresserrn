@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import WelcomeScreen from "../pages/WelcomeScreen";
 import OnboardingScreen from "../pages/OnboardingScreen";
 import SignupScreen from "../pages/SignupScreen";
+import ConfirmScreen from "../pages/ConfirmScreen";
 
 import AsyncStorage from "@react-native-community/async-storage";
 
@@ -41,6 +42,11 @@ const AuthNavigator = () => {
           component={SignupScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="Confirm"
+          component={ConfirmScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     );
   } else {
@@ -54,6 +60,11 @@ const AuthNavigator = () => {
         <Stack.Screen
           name="Signup"
           component={SignupScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Confirm"
+          component={ConfirmScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
