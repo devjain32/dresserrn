@@ -10,6 +10,11 @@
       "StackName": "amplify-dresser-staging-220455",
       "StackId": "arn:aws:cloudformation:us-east-1:192418481205:stack/amplify-dresser-staging-220455/87a0c220-5b6b-11eb-849b-126979f2f819",
       "AmplifyAppId": "d2tk31qvzwdgyw"
+    },
+    "categories": {
+      "auth": {
+        "dresser63d579df": {}
+      }
     }
   }
 }

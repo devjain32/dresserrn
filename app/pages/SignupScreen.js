@@ -15,7 +15,7 @@ import { Auth } from "aws-amplify";
 import Constants from "expo-constants";
 import { BlurView } from "expo-blur";
 
-const phoneRegExp = /^(\+\d{1,2})?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+const phoneRegExp = /^(\+\d{1,2})?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}\s?$/;
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required().label("First Name"),
@@ -25,7 +25,6 @@ const validationSchema = Yup.object().shape({
     .required()
     .matches(phoneRegExp, "Phone number is not valid")
     .label("Phone Number"),
-  address: Yup.string().required().label("Delivery Address"),
   password: Yup.string().required().min(4).label("Password"),
 });
 
@@ -56,10 +55,34 @@ function SignupScreen({ navigation }) {
               last_name: "",
               email: "",
               phone_number: "",
-              address: "",
               password: "",
             }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => {
+              if(values.phone_number.charAt(0) != '+') {
+                values.phone_number = values.phone_number.match(/\d/g);
+                values.phone_number = values.phone_number.join("");
+                values.phone_number = "+1" + values.phone_number; // fine for now since assuming the number will be a USA number
+              }
+              console.log(values.phone_number)
+              async function signUp() {
+                try {
+                    const { user } = await Auth.signUp({
+                        username: values.email,
+                        password: values.password,
+                        attributes: {
+                            email: values.email,
+                            phone_number: values.phone_number,   // optional - E.164 number convention
+                            given_name: values.first_name,
+                            family_name: values.last_name,
+                        }
+                    });
+                    console.log(user);
+                } catch (error) {
+                    console.log('error signing up:', error);
+                }
+              }
+              //signUp();
+            }}
             validationSchema={validationSchema}
           >
             <AppFormField
@@ -97,15 +120,6 @@ function SignupScreen({ navigation }) {
               name="phone_number"
               placeholder="Phone Number"
               textContentType="telephoneNumber"
-            />
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="map-marker"
-              keyboardType="default"
-              name="address"
-              placeholder="Delivery Address"
-              textContentType="fullStreetAddress"
             />
             <AppFormField
               autoCapitalize="none"
