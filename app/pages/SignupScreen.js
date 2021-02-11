@@ -66,22 +66,23 @@ function SignupScreen({ navigation }) {
               console.log(values.phone_number)
               async function signUp() {
                 try {
-                    const { user } = await Auth.signUp({
-                        username: values.email,
-                        password: values.password,
-                        attributes: {
-                            email: values.email,
-                            phone_number: values.phone_number,   // optional - E.164 number convention
-                            given_name: values.first_name,
-                            family_name: values.last_name,
-                        }
-                    });
-                    console.log(user);
+                    // const { user } = await Auth.signUp({
+                    //     username: values.email,
+                    //     password: values.password,
+                    //     attributes: {
+                    //         email: values.email,
+                    //         phone_number: values.phone_number,   // optional - E.164 number convention
+                    //         given_name: values.first_name,
+                    //         family_name: values.last_name,
+                    //     }
+                    // });
+                    // console.log(user);
+                    navigation.navigate("Confirm")
                 } catch (error) {
-                    console.log('error signing up:', error);
+                    //console.log('error signing up:', error);
                 }
               }
-              //signUp();
+              signUp();
             }}
             validationSchema={validationSchema}
           >
