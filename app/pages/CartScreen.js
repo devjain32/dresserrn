@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import {
   StyleSheet,
@@ -18,6 +18,9 @@ import lists from "../config/lists";
 import { calcTotal, filterLists } from "../config/filter";
 import Card from "../components/Card";
 import { loadStripe } from "@stripe/stripe-js";
+import { Auth } from "aws-amplify";
+import { API } from 'aws-amplify';
+import { listUsers } from '../../src/graphql/queries';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 // import Screen from "../components/Screen";
@@ -32,8 +35,23 @@ import { loadStripe } from "@stripe/stripe-js";
 // const stripePromise = loadStripe("pk_test_1wNpFTTZfCE6ziX8TdxmPpvp00tOQHsHPj");
 
 function CartScreen({ navigation }) {
+  const [cartItems, setCartItems] = useState([]);
+  const [total, setTotal] = useState([]);
+
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      const currUser = await Auth.currentAuthenticatedUser({bypassCache: false});
+      let filter = {
+        Email: {eq: currUser.attributes.email}
+      };
+      const accDetails = await API.graphql({ query: listUsers, variables: { filter: filter}});
+      setCartItems(accDetails.data.listUsers.items[0].CartItems);
+      setTotal(calcTotal(cartItems));
+    };
+    fetchCartItems();
+  }, []);
   const newList = filterLists(lists, "Hoodies");
-  const total = calcTotal(newList);
+
   return (
     <View style={styles.view}>
       <View style={styles.topPart}>
@@ -65,7 +83,7 @@ function CartScreen({ navigation }) {
         /> */}
       </View>
       <FlatList
-        data={newList}
+        data={cartItems}
         keyExtractor={(listings) => listings.id.toString()}
         numColumns={2}
         showsVerticalScrollIndicator={false}

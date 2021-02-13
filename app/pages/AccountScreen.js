@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { Button } from 'react-native-elements';
 
@@ -11,6 +11,9 @@ import Profile from "../components/Profile";
 import { Auth } from "aws-amplify";
 import AppInput from "../components/AppInput";
 import ListItem from "../components/lists/ListItem";
+
+import { API } from 'aws-amplify';
+import { listUsers } from '../../src/graphql/queries';
 
 const menuItems = [
   {
@@ -30,6 +33,20 @@ const menuItems = [
 ];
 
 function AccountScreen({ navigation }) {
+  const [details, setDetails] = useState([]);
+
+  useEffect(() => {
+    const fetchAccDetails = async () => {
+      const currUser = await Auth.currentAuthenticatedUser({bypassCache: false});
+      let filter = {
+        Email: {eq: currUser.attributes.email}
+      };
+      const accDetails = await API.graphql({ query: listUsers, variables: { filter: filter}});
+      setDetails(accDetails.data.listUsers.items[0]);
+    };
+    fetchAccDetails();
+  }, []);
+
   return (
     <Screen style={styles.screen}>
       <View style={styles.topPart}>
@@ -40,7 +57,7 @@ function AccountScreen({ navigation }) {
       <View style={styles.container}>
         <AppInput
           title="Email Address"
-          subtitle="devrjain32200@gmail.com"
+          subtitle={details.Email}
           name="email"
         />
         <View
@@ -48,13 +65,13 @@ function AccountScreen({ navigation }) {
         />
         <AppInput
           title="Delivery Address"
-          subtitle="500 Dulles Ave. Sugar Land, TX 77074"
+          subtitle={details.Address}
           name="address"
         />
         <View
           style={{ width: "100%", height: 1, backgroundColor: colors.primary }}
         />
-        <AppInput title="Phone Number" subtitle="(832) 523-1603" name="phone" />
+        <AppInput title="Phone Number" subtitle={details.PhoneNumber} name="phone" />
       </View>
       <Button title="Logout" name="logout" onPress={() => Auth.signOut()}/>
     </Screen>

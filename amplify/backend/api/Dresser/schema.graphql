@@ -43,6 +43,7 @@ type Item @model @auth(rules: [{allow: public}]) @key(name: "byThriftStore", fie
   thriftstoreID: ID!
   Price: Float
   Images: [AWSURL!]
+  Tags: [String]
 }
 
 type User @model @auth(rules: [{allow: public}]) {

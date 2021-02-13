@@ -18,7 +18,6 @@ function App() {
           let user = await Auth.currentAuthenticatedUser({bypassCache: false});
           // No error, change auth state to show page content
           setAuthState("authenticated");
-          console.log(user);
      }
      catch(error){
          // Error, change auth state to redirect user to login page

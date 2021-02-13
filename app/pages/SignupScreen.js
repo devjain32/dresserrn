@@ -72,7 +72,7 @@ function SignupScreen({ navigation }) {
                   values.phone_number = "+1" + values.phone_number; // fine for now since assuming the number will be a USA number
                 }
                 console.log(values.phone_number);
-                async function signUp() {
+                async function signUp() { 
                   try {
                     const { user } = await Auth.signUp({
                       username: values.email,
@@ -85,11 +85,17 @@ function SignupScreen({ navigation }) {
                       },
                     });
                     console.log(user);
+                    navigation.navigate("Confirm", { 
+                      userFirstName: values.first_name, 
+                      userLastName: values.last_name,
+                      userEmail: values.email, 
+                      userPhoneNumber: values.phone_number, 
+                      userPassword: values.password })
                   } catch (error) {
                     console.log("error signing up:", error);
                   }
                 }
-                signUp().then(navigation.navigate("Confirm", { userEmail: values.email, userPassword: values.password }));
+                signUp();
               }}
               validationSchema={validationSchema}
             >

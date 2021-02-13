@@ -49,6 +49,7 @@ export declare class Item {
   readonly thriftstoreID: string;
   readonly Price?: number;
   readonly Images?: string[];
+  readonly Tags?: (string | null)[];
   constructor(init: ModelInit<Item>);
   static copyOf(source: Item, mutator: (draft: MutableModel<Item>) => MutableModel<Item> | void): Item;
 }

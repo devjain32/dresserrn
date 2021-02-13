@@ -21,13 +21,15 @@ import { Auth } from "aws-amplify";
 import Constants from "expo-constants";
 import { BlurView } from "expo-blur";
 import { Keyboard } from "react-native";
+import { DataStore } from "@aws-amplify/datastore";
+import { User } from "../../src/models";
 
 const validationSchema = Yup.object().shape({
   input_code: Yup.string().required().label("Input Code"),
 });
 
 function ConfirmScreen({ route, navigation }) {
-  const { userEmail, userPassword } = route.params;
+  const { userFirstName, userLastName, userEmail, userPhoneNumber, userPassword } = route.params;
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -57,11 +59,22 @@ function ConfirmScreen({ route, navigation }) {
                 async function confirmSignUp() {
                   try {
                     await Auth.confirmSignUp(userEmail, values.input_code);
+                    await DataStore.save(
+                      new User({
+                        "FirstName": userFirstName,
+                        "LastName": userLastName,
+                        "PhoneNumber": userPhoneNumber,
+                        "Email": userEmail,
+                        "PurchasedItems": [],
+                        "CartItems": []
+                      })
+                    );
+                    Auth.signIn(userEmail, userPassword)
                   } catch (error) {
                       console.log('error confirming sign up', error);
                   }
                 }
-                confirmSignUp().then(Auth.signIn(userEmail, userPassword));
+                confirmSignUp();
               }}
               validationSchema={validationSchema}
             >

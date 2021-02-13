@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -17,10 +17,23 @@ import { filterLists } from "../config/filter";
 import lists from "../config/lists";
 import Card from "../components/Card";
 import SectionTitle from "../components/SectionTitle";
+import { API } from 'aws-amplify';
+import { getThriftStore } from '../../src/graphql/queries';
+
 
 function ItemDetails({ route, navigation }) {
   const listing = route.params;
-  const newList = filterLists(lists, listing.ItemCategory);
+  const [thriftStore, setThriftStore] = useState([]);
+
+  useEffect(() => {
+    const fetchStore = async () => {
+      const store = await API.graphql({ query: getThriftStore, variables: { id : listing.thriftstoreID }});
+      setThriftStore(store.data.getThriftStore.Name);
+      
+    };
+    fetchStore();
+  }, []);
+
   return (
     <View style={styles.screen}>
       <View style={styles.imageContainer}>
@@ -34,7 +47,7 @@ function ItemDetails({ route, navigation }) {
       </View>
       <ListCategories
         title={"Category"}
-        subtitle={listing.ItemCAtegory}
+        subtitle={listing.ItemCategory}
         onPress={() =>
           navigation.push("Specific", { name: listing.ItemCategory })
         }
@@ -47,9 +60,9 @@ function ItemDetails({ route, navigation }) {
       />
       <ListCategories
         title={"Thrift Store"}
-        subtitle={listing.thriftstoreID} // need to query the thriftstores as well so we can access that here based on thriftStoreID
+        subtitle={thriftStore} // need to query the thriftstores as well so we can access that here based on thriftStoreID
         onPress={() =>
-          navigation.push("Specific", { name: listing.thriftstoreID })
+          navigation.push("Specific", { name: thriftStore })
         }
       />
       <ListCategories title={"Tags"} tags={listing.tags} />
