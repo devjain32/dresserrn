@@ -6,9 +6,6 @@ or in the "license" file accompanying this file. This file is distributed on an 
 See the License for the specific language governing permissions and limitations under the License.
 */
 
-const stripe = require('stripe')(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);
-
-
 var express = require('express')
 var bodyParser = require('body-parser')
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
@@ -25,90 +22,27 @@ app.use(function(req, res, next) {
   next()
 });
 
-app.post('/checkout', async function(req, res) {
+const stripe = require('stripe')(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);
+
+app.post('/checkout', async function (req, res) {
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: [
-        {
-          price: req.body.priceId, // The priceId of the product being purchased, retrievable from the Stripe dashboard
-          quantity: req.body.quantity,
-        },
-      ],
-      mode: 'payment',
-      client_reference_id: req.body.client_reference_id,
-      success_url:
-        'exp://68.170.93.226:19000/', // The URL the customer will be directed to after the payment or subscription creation is successful.
-      cancel_url: 'exp://68.170.93.226:19000/', // The URL the customer will be directed to if they decide to cancel payment and return to your website.
-    })
-    res.json(session)
+      line_items: [{
+        name: req.body.name,
+        description: req.body.description,
+        images: req.body.images,
+        amount: req.body.amount,
+        currency: req.body.currency,
+        quantity: req.body.quantity,
+      }],
+      success_url: req.body.success_url,
+      cancel_url: req.body.cancel_url,
+    });
+    res.json({ err: null, success: 'Create stripe checkout session succeed!', session })
   } catch (err) {
-    res.json(err)
+    res.json({ err: err })
   }
-})
+});
 
-
-// /**********************
-//  * Example get method *
-//  **********************/
-
-// app.get('/checkout', function(req, res) {
-//   // Add your code here
-//   res.json({success: 'get call succeed!', url: req.url});
-// });
-
-// app.get('/checkout/*', function(req, res) {
-//   // Add your code here
-//   res.json({success: 'get call succeed!', url: req.url});
-// });
-
-// /****************************
-// * Example post method *
-// ****************************/
-
-// app.post('/checkout', function(req, res) {
-//   // Add your code here
-//   res.json({success: 'post call succeed!', url: req.url, body: req.body})
-// });
-
-// app.post('/checkout/*', function(req, res) {
-//   // Add your code here
-//   res.json({success: 'post call succeed!', url: req.url, body: req.body})
-// });
-
-// /****************************
-// * Example put method *
-// ****************************/
-
-// app.put('/checkout', function(req, res) {
-//   // Add your code here
-//   res.json({success: 'put call succeed!', url: req.url, body: req.body})
-// });
-
-// app.put('/checkout/*', function(req, res) {
-//   // Add your code here
-//   res.json({success: 'put call succeed!', url: req.url, body: req.body})
-// });
-
-// /****************************
-// * Example delete method *
-// ****************************/
-
-// app.delete('/checkout', function(req, res) {
-//   // Add your code here
-//   res.json({success: 'delete call succeed!', url: req.url});
-// });
-
-// app.delete('/checkout/*', function(req, res) {
-//   // Add your code here
-//   res.json({success: 'delete call succeed!', url: req.url});
-// });
-
-// app.listen(3000, function() {
-//     console.log("App started")
-// });
-
-// Export the app object. When executing the application local this does nothing. However,
-// to port it to AWS Lambda we will create a wrapper around that will load the app from
-// this file
 module.exports = app

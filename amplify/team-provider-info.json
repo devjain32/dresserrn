@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "dresser63d579df": {}
+      },
+      "function": {
+        "stripeCheckout": {
+          "deploymentBucketName": "amplify-dresser-staging-220455-deployment",
+          "s3Key": "amplify-builds/stripeCheckout-44454f334f4141686c78-build.zip"
+        }
       }
     }
   }
