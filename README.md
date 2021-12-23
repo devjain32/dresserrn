@@ -1,1 +1,1 @@
-React Native app with Firebase authentication
+React Native app with AWS Amplify
